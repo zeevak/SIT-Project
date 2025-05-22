@@ -1,3 +1,8 @@
+
+# SIT-Project
+
+kavinuS
+=======
 # Fuel Pass - Fuel Management System
 This project is a fuel management system that was developed to simplify and enhance the process of fuel allocation and usage tracking. This system is designed to streamline fuel distribution by integrating vehicle registration, QR code-based tracking, and station management. Vehicles are assigned weekly fuel quotas, and stations use an app to scan QR codes, log fuel transactions, and update quotas in real time. An admin panel ensures that all transactions and registrations are monitored and approved as necessary.
 
@@ -95,12 +100,4 @@ We acknowledge the contributions of all team members in the successful completio
 - Danindu Ransika: https://github.com/danindu2024
 - Tharindu Thejan: https://github.com/TharinduThejan
 - Zaiena R.: https://github.com/zaina-r
-
-
-
-
-
-
-
-
 
