@@ -1,7 +1,5 @@
-
 # SIT-Project
 
-=======
 # Fuel Pass - Fuel Management System
 An innovative digital solution designed to modernize fuel distribution and tracking processes. This comprehensive platform bridges the gap between vehicle owners, fuel stations, and administrative oversight through technology-driven automation and real-time monitoring.
 
@@ -97,3 +95,4 @@ npx react-native run-ios
 This project represents collaborative effort from our development team, with each member contributing specialized expertise in different aspects of the platform's architecture and implementation.
 
 This platform demonstrates modern approaches to digitizing traditional fuel distribution systems while maintaining security, scalability, and user experience as core priorities.
+
