@@ -89,7 +89,7 @@
 - **Sharukkan Imanuval** ([SharukkanN](https://github.com/SharukkanN))
 - **Thulini Premasinghe** ([thulinipremasinghe](https://github.com/thulinipremasinghe))
 - **Kushani Apsara** ([kushaniapsara](https://github.com/kushaniapsara))
-- **Sumaiya Ziyard** ([sumaiya-z](https://github.com/sumaiya-z)
+- **Sumaiya Ziyard** ([sumaiya-z](https://github.com/sumaiya-z))
 
 ---
 
