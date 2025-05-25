@@ -1,0 +1,53 @@
+# macOS metadata files
+__MACOSX/
+._*
+
+# Frontend dependencies and build artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/package-lock.json
+
+# Backend dependencies and build artifacts
+backend/backend/target/
+backend/backend/.mvn/wrapper/maven-wrapper.jar
+backend/backend/.mvn/wrapper/maven-wrapper.properties
+
+# Mobile app dependencies and build artifacts
+mobileScanner/node_modules/
+mobileScanner/dist/
+mobileScanner/android/build/
+mobileScanner/android/.gradle/
+mobileScanner/android/app/build/
+mobileScanner/package-lock.json
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+
+# Temporary files
+*.tmp
+*.temp
