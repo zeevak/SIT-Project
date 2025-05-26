@@ -136,8 +136,8 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <div className="w-56 bg-slate-800 text-white shadow-2xl border-r border-neutral-500 p-1 fixed h-screen">
+    <div className="flex min-h-screen bg-gray-100 ">
+      <div className="w-56 bg-black text-white shadow-2xl  p-1 fixed h-screen">
         <div className="flex items-center justify-between">
           <img
             src="../src/Assets/Monochrome Ilustration Graffiti Logo new.png"
@@ -149,14 +149,14 @@ const AdminDashboard = () => {
         <div>
           <input
             type="text"
-            className="bg-slate-700 border border-neutral-500 p-1 text-sm rounded-lg w-full placeholder-gray-300"
+            className="bg-black border border-neutral-500 p-1 text-sm rounded-lg w-full placeholder-gray-300"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
-        <nav className="mt-6 text-neutral-300 flex flex-col items-start gap-3">
+        <nav className="mt-6 text-white flex flex-col items-start gap-3">
           <div className="space-y-1">
             <h1 className="text-lg font-medium px-2 text-neutral-400">Dashboard</h1>
             {filterLinks(dashboardLinks).map((link, index) => (

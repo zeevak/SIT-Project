@@ -177,383 +177,169 @@ const UserRegisterationForm = () => {
   };
 
   return (
-    <div className="bg-slate-800 h-screen w-full fixed ">
-      <div className="container my-20">
-        <div className="flex justify-between items-start">
-        
-          <div className="container text-sm mb-32 ">
-            <div className=" w-[450px]">
-              <motion.div
-                variants={SlideLeft(0.2)}
-                initial="hidden"
-                whileInView="visible"
-                className="w-1/2 flex flex-col mt-3"
-              >
-                {error && <Error error={error} setError={setError} />}
-                {success && (
-                  <Success success={success} setSuccess={setSuccess} />
-                )}
-                <form onSubmit={handleSubmit} className="w-[500px]">
-                  <div className="m-5 w-[460px]">
-                    <label className="block my-1 text-neutral-400">
-                      Tel No
-                    </label>
+    <div className="bg-black min-h-screen w-full pt-32 pb-10"> {/* Increased pt-32 for more navbar space */}
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center">
+          <div className="w-full max-w-md">
+            <motion.div
+              variants={SlideLeft(0.2)}
+              initial="hidden"
+              whileInView="visible"
+              className="flex flex-col"
+            >
+            
+
+              {error && <Error error={error} setError={setError} />}
+              {success && <Success success={success} setSuccess={setSuccess} />}
+
+              <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg">
+                  {/* Single-line centered title */}
+              <h1 className="text-3xl font-bold text-white text-center mb-8">
+                User Registration
+              </h1>
+                <div className="mb-4">
+                  <label className="block text-neutral-300 mb-2">Tel No</label>
+                  <input
+                    type="text"
+                    name="telno"
+                    value={formData.telno}
+                    onChange={handleChange}
+                    placeholder="+94xxxxxxxx"
+                    className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                    disabled={otpSent}
+                  />
+                </div>
+
+                {/* Name fields */}
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-neutral-300 mb-2">First Name</label>
                     <input
                       type="text"
-                      name="telno"
-                      value={formData.telno}
+                      name="firstname"
+                      value={formData.firstname}
                       onChange={handleChange}
-                      placeholder="+94xxxxxxxx"
-                      className="bg-gray-200 p-1 w-full"
-                      disabled={otpSent}
+                      placeholder="firstname"
+                      className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
                     />
-                {/*    {!otpSent ? (
-                      <button
-                        type="button"
-                        className="bg-blue-700 text-white px-6 py-1 mt-3"
-                        onClick={handleSendOtp}
-                        disabled={isLoading}
-                      >
-                        {isLoading ? (
-                          <Oval
-                            height={24}
-                            width={24}
-                            color="white"
-                            visible={true}
-                            ariaLabel="oval-loading"
-                            secondaryColor="white"
-                            strokeWidth={3}
-                            strokeWidthSecondary={3}
-                          />
-                        ) : (
-                          "Send OTP"
-                        )}
-                      </button>
-                    ) : (
-                      <div className="mt-4">
-                        <label className="block my-1 text-neutral-400 ">
-                          Enter OTP
-                        </label>
-                        <div className="flex  items-center w-full ">
-                          <input
-                            type="text"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                            className="bg-gray-200 p-1 w-[50%] "
-                          />
-                          <button
-                            type="button"
-                            className="bg-blue-700 text-white px-6 py-1 w-[50%] "
-                            onClick={handleVerifyOtp}
-                            disabled={isLoading}
-                          >
-                            {isLoading ? (
-                              <Oval
-                                height={24}
-                                width={24}
-                                color="white"
-                                visible={true}
-                                ariaLabel="oval-loading"
-                                secondaryColor="white"
-                                strokeWidth={3}
-                                strokeWidthSecondary={3}
-                              />
-                            ) : (
-                              "Verify OTP"
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    )}*/ }
                   </div>
-                  {otpVerified && (
-                    <>
-                      <div className="grid grid-cols-2 m-5 ">
-                        <div className="mr-3">
-                          <label className="block   text-neutral-400">
-                            First Name
-                          </label>
-                          <input
-                            type="text"
-                            name="firstname"
-                            value={formData.firstname}
-                            onChange={handleChange}
-                            placeholder="firstname"
-                            className="bg-gray-200 p-1  w-full"
-                          />
-                        </div>
-                        <div className="mr-3">
-                          <label className="block  text-neutral-400">
-                            Last Name
-                          </label>
-                          <input
-                            type="text"
-                            name="lastname"
-                            value={formData.lastname}
-                            onChange={handleChange}
-                            placeholder="lastname"
-                            className="bg-gray-200 p-1 w-[230px]"
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 m-5">
-                        <div className="mr-3">
-                          <label className="block  text-neutral-400">
-                            Username
-                          </label>
-                          <input
-                            type="text"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            placeholder="username"
-                            className="bg-gray-200 p-1  w-full"
-                          />
-                        </div>
-                        <div className="">
-                          <label className="block  text-neutral-400">
-                            Password
-                          </label>
-                          <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder="password"
-                            className="bg-gray-200 p-1 w-full"
-                          />
-                        </div>
-                      </div>
-                      <div className="m-5">
-                        <label className="block  text-neutral-400">
-                          confirmed Password
-                        </label>
-                        <input
-                          type="password"
-                          name="confirmpassword"
-                          value={formData.confirmpassword}
-                          onChange={handleChange}
-                          placeholder="password"
-                          className="bg-gray-200 p-1 w-full"
-                        />
-                      </div>
-
-                      <div className="m-5">
-                        <label className="block my-1 text-neutral-400">
-                          NIC
-                        </label>
-                        <input
-                          type="text"
-                          name="nic"
-                          value={formData.nic}
-                          onChange={handleChange}
-                          placeholder="NIC number"
-                          className="bg-gray-200 p-1 w-full"
-                        />
-                      </div>
-                      <div className="m-5">
-                        <label className="block text-neutral-400">Role</label>
-                        <select
-                          name="role"
-                          value={formData.role}
-                          onChange={handleChange}
-                          className="bg-gray-200 p-1 w-full"
-                        >
-                          <option value="">Select Role</option>
-                          <option value="FUELSTATION_OWNER">
-                            Fuel Station Owner
-                          </option>
-                          <option value="VEHICLE_OWNER">Vehicle Owner</option>
-                        </select>
-                      </div>
-                      {formData.role === "FUELSTATION_OWNER" && (
-                        <div className="m-5">
-                          <label className="block  text-neutral-400">
-                            License Number
-                          </label>
-                          <input
-                            type="text"
-                            name="licenseNumber"
-                            value={formData.licenseNumber}
-                            onChange={handleChange}
-                            placeholder="License number"
-                            className="bg-gray-200 p-1 w-full"
-                          />
-                        </div>
-                      )}
-                      <div className="m-5">
-                        <label className="flex items-center gap-2 text-neutral-400">
-                          <input
-                            type="checkbox"
-                            onChange={handleCheckboxChange}
-                            className="h-4 w-4"
-                          />
-                          <a href="/termsAndConditions">I accept the terms and conditions.</a>
-                        </label>
-                      </div>
-
-                      <div className="m-5">
-                        <button
-                          type="submit"
-                          className={`bg-blue-700 text-white px-6 py-1 w-full ${
-                            !acceptedTerms
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
-                          }`}
-                          disabled={!acceptedTerms}
-                        >
-                          Create an account
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </form>
-              </motion.div>
-            </div>
-          </div>
-          <div className="">
-            <h1 className="text-3xl font-extrabold px-8 mt-14 text-white">
-              Sign Up
-            </h1>
-            <div className="relative  ">
-              <div className=" p-8 text-white">
-                <div className="flex flex-col gap-3">
-                  <motion.p
-                    variants={SlideUp(0.2)}
-                    initial="hidden"
-                    whileInView={"visible"}
-                    className="flex items-center gap-2"
-                  >
-                    <img
-                      src="../src/Assets/accept.png"
-                      alt=""
-                      className="w-[15px] h-[15px] inline"
+                  <div>
+                    <label className="block text-neutral-300 mb-2">Last Name</label>
+                    <input
+                      type="text"
+                      name="lastname"
+                      value={formData.lastname}
+                      onChange={handleChange}
+                      placeholder="lastname"
+                      className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
                     />
-                    <span>First Name</span>
-                  </motion.p>
-                  <motion.p
-                    variants={SlideUp(0.4)}
-                    initial="hidden"
-                    whileInView={"visible"}
-                    className="flex items-center gap-2"
-                  >
-                    <img
-                      src="../src/Assets/accept.png"
-                      alt=""
-                      className="w-[15px] h-[15px] inline"
-                    />
-                    <span>Last Name</span>
-                  </motion.p>
-                  <motion.p
-                    variants={SlideUp(0.3)}
-                    initial="hidden"
-                    whileInView={"visible"}
-                    className="flex items-start gap-2"
-                  >
-                    <img
-                      src="../src/Assets/accept.png"
-                      alt=""
-                      className="w-[15px] h-[15px] inline"
-                    />
-                    <span>NIC</span>
-
-                    <span className="text-xs text-neutral-400 ">
-                      Enter your National Identity Card number. This helps us
-                      verify your identity and ensure that your registration is
-                      valid. This is typically a government-issued
-                      numberExample:
-                      <span className="text-white">
-                        "123456789456V / 200023002913"
-                      </span>{" "}
-                    </span>
-                  </motion.p>
-                  <motion.p
-                    variants={SlideUp(0.4)}
-                    initial="hidden"
-                    whileInView={"visible"}
-                    className="flex items-start gap-2"
-                  >
-                    <img
-                      src="../src/Assets/accept.png"
-                      alt=""
-                      className="w-[15px] h-[15px] inline"
-                    />
-                    <span>Tel No</span>
-
-                    <span className="text-xs text-neutral-400 ">
-                      Enter your telephone number. Please ensure that it is
-                      active and that we can reach you if necessary. Use the
-                      format +94xxxxxxxx (Sri Lanka)
-                      <span className="text-white">
-                        <br />
-                        Example:"+94123456789"
-                      </span>{" "}
-                    </span>
-                  </motion.p>
-                  <motion.p
-                    variants={SlideUp(0.5)}
-                    initial="hidden"
-                    whileInView={"visible"}
-                    className="flex items-start gap-2"
-                  >
-                    <img
-                      src="../src/Assets/accept.png"
-                      alt=""
-                      className="w-[15px] h-[15px] inline"
-                    />
-                    <span>Username</span>
-                    <span className="text-xs text-neutral-400">
-                      Choose a unique username. This will be used to identify
-                      your account. It should be something you’ll remember and
-                      may include letters, numbers, and underscores. <br />
-                      <span className="text-white">Example:name@gmail.com</span>
-                    </span>
-                  </motion.p>
-                  <motion.p
-                    variants={SlideUp(0.6)}
-                    initial="hidden"
-                    whileInView={"visible"}
-                    className="flex items-start gap-2"
-                  >
-                    <img
-                      src="../src/Assets/accept.png"
-                      alt=""
-                      className="w-[15px] h-[15px] inline"
-                    />
-                    <span>Password</span>
-                    <span className="text-xs text-neutral-400">
-                      Create a strong password that you can easily remember but
-                      is difficult for others to guess. We recommend using a
-                      combination of letters, numbers, and special characters..{" "}
-                      <br />
-                      <span className="text-white">
-                        Example:xxxxxx atlease 5 characters
-                      </span>
-                    </span>
-                  </motion.p>
-                  <motion.p
-                    variants={SlideUp(0.7)}
-                    initial="hidden"
-                    whileInView={"visible"}
-                    className="flex items-start gap-2"
-                  >
-                    <img
-                      src="../src/Assets/accept.png"
-                      alt=""
-                      className="w-[15px] h-[15px] inline"
-                    />
-                    <span>Role</span>
-                    <span className="text-xs text-neutral-400">
-                      When you select fuel station owner you need to provide one
-                      more secure license No for you station registration <br />
-                      <span className="text-white">
-                        Example:xxxxxx secure license code for fuel station
-                      </span>
-                    </span>
-                  </motion.p>
+                  </div>
                 </div>
-              </div>
-            </div>
+
+                {/* Username and Password */}
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-neutral-300 mb-2">Username</label>
+                    <input
+                      type="text"
+                      name="username"
+                      value={formData.username}
+                      onChange={handleChange}
+                      placeholder="username"
+                      className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-neutral-300 mb-2">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder="password"
+                      className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Confirm Password */}
+                <div className="mb-4">
+                  <label className="block text-neutral-300 mb-2">Confirmed Password</label>
+                  <input
+                    type="password"
+                    name="confirmpassword"
+                    value={formData.confirmpassword}
+                    onChange={handleChange}
+                    placeholder="password"
+                    className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+
+                {/* Rest of the form fields */}
+                <div className="mb-4">
+                  <label className="block text-neutral-300 mb-2">NIC</label>
+                  <input
+                    type="text"
+                    name="nic"
+                    value={formData.nic}
+                    onChange={handleChange}
+                    placeholder="NIC number"
+                    className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-neutral-300 mb-2">Role</label>
+                  <select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                  >
+                    <option value="">Select Role</option>
+                    <option value="FUELSTATION_OWNER">Fuel Station Owner</option>
+                    <option value="VEHICLE_OWNER">Vehicle Owner</option>
+                  </select>
+                </div>
+
+                {formData.role === "FUELSTATION_OWNER" && (
+                  <div className="mb-4">
+                    <label className="block text-neutral-300 mb-2">License Number</label>
+                    <input
+                      type="text"
+                      name="licenseNumber"
+                      value={formData.licenseNumber}
+                      onChange={handleChange}
+                      placeholder="License number"
+                      className="bg-gray-700 text-white p-2 w-full rounded border border-gray-600 focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <label className="flex items-center gap-2 text-neutral-300">
+                    <input
+                      type="checkbox"
+                      onChange={handleCheckboxChange}
+                      className="h-4 w-4"
+                    />
+                    <a href="/termsAndConditions" className="text-blue-400 hover:underline">
+                      I accept the terms and conditions.
+                    </a>
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  className={`bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded w-full transition ${
+                    !acceptedTerms ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  disabled={!acceptedTerms}
+                >
+                  Create an account
+                </button>
+              </form>
+            </motion.div>
           </div>
         </div>
       </div>

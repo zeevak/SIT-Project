@@ -92,7 +92,7 @@ const AvailableVehicles = () => {
 
         <button
           onClick={() => setAddingVehicle(true)}
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+          className="bg-blue-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"
         >
           <Plus size={18} /> Add Vehicle
         </button>

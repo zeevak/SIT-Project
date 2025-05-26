@@ -122,169 +122,138 @@ const VehicleRegistration = () => {
 
   return (
     <>
-      <div className="bg-slate-800 h-screen w-full fixed ">
+       <div className="bg-gray-900 min-h-screen w-full flex items-center justify-center pt-32 pb-10 " >
+      <div className="w-full max-w-6xl">
         {error && <Error error={error} setError={setError} />}
         {success && <Success success={success} setSuccess={setSuccess} />}
-        <div className=" container flex w-full text-sm  mt-44 text-white ">
+
+        <div className="flex flex-col lg:flex-row gap-8 justify-center">
+          {/* Registration Form - Centered */}
           <motion.div
             variants={SlideRight(0.1)}
             initial="hidden"
             whileInView={"visible"}
-            className="w-full flex flex-col space-y-8  p-6 rounded-lg "
+            className="w-full lg:w-1/2 max-w-2xl"
           >
-            <h1 className="text-4xl font-semibold">
-              Vehicle Registration 
-            </h1>
-            <form onSubmit={handleSubmit}>
-              <div className="flex gap-5">
-                <div>
-                  <label className="block my-1 text-neutral-400">
-                    Vehicle Number
-                  </label>
-                  <input
-                    type="text"
-                    name="license_plate_no"
-                    value={formData.vehicleNumber}
-                    onChange={handleChange}
-                    placeholder="Enter vehicle number"
-                    className="bg-gray-600 p-1 rounded-sm text-md w-full"
-                    required
-                  />
+            <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
+              <h1 className="text-3xl font-bold mb-6 text-white text-center">
+                Vehicle Registration
+              </h1>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-300 mb-2">
+                      Vehicle Number
+                    </label>
+                    <input
+                      type="text"
+                      name="license_plate_no"
+                      value={formData.license_plate_no}
+                      onChange={handleChange}
+                      placeholder="Enter vehicle number"
+                      className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-300 mb-2">
+                      Chassis Number
+                    </label>
+                    <input
+                      type="text"
+                      name="vehicleRegNo"
+                      value={formData.vehicleRegNo}
+                      onChange={handleChange}
+                      placeholder="Enter chassis number"
+                      className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block my-1 text-neutral-400">
-                    Chassis Number
-                  </label>
-                  <input
-                    type="text"
-                    name="vehicleRegNo"
-                    value={formData.vehicleRegNo}
-                    onChange={handleChange}
-                    placeholder="Enter chassis number"
-                    className="bg-gray-600 p-1 rounded-sm text-md w-full"
-                    required
-                  />
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-300 mb-2">
+                      Vehicle Type
+                    </label>
+                    <select
+                      name="vehicle_type"
+                      value={formData.vehicle_type}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    >
+                      <option value="">Select Vehicle Type</option>
+                      {vehicleType.map((type) => (
+                        <option key={type.vehicleTypeId} value={type.vehicleType}>
+                          {type.vehicleType}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-300 mb-2">
+                      Fuel Type
+                    </label>
+                    <select
+                      name="fuel_type"
+                      value={formData.fuel_type}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      required
+                    >
+                      <option value="">Select fuel type</option>
+                      <option value="Petrol">Petrol</option>
+                      <option value="Diesel">Diesel</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col gap-5  my-7 ">
-                <div>
-                  <label className="block my-1 text-neutral-400">
-                    Vehicle Type
-                  </label>
-                  <select
-                    name="vehicle_type"
-                    value={formData.vehicle_type}
-                    onChange={handleChange}
-                    className="bg-gray-600 p-1 rounded-sm text-md w-[386px]"
-                    required
+
+                <div className="pt-4">
+                  <button
+                    type="submit"
+                    className={`w-full px-4 py-3 bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-md transition duration-200 ${
+                      loading ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
+                    disabled={loading}
                   >
-                    {/* <option value="">Select vehicle type</option>
-                    <option value="Car">Car</option>
-                    <option value="Motorcycle">Motorcycle</option>
-                    <option value="Truck">Truck</option>
-                    <option value="Van">Van</option> */}
-                    <option value="">Select Vehicle Type</option>
-                    {vehicleType.map((type, index) => (
-                      <option key={type.vehicleTypeId} value={type.vehicleType}>
-                        {type.vehicleType}
-                      </option>
-                    ))}
-                  </select>
+                    {loading ? (
+                      <div className="flex items-center justify-center">
+                        <svg
+                          className="animate-spin h-5 w-5 mr-3 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8V12H4z"
+                          ></path>
+                        </svg>
+                        Processing...
+                      </div>
+                    ) : (
+                      "Register Vehicle"
+                    )}
+                  </button>
                 </div>
-
-                <div>
-                  <label className="block my-1 text-neutral-400">
-                    Fuel Type
-                  </label>
-                  <select
-                    name="fuel_type"
-                    value={formData.fuel_type}
-                    onChange={handleChange}
-                    className="bg-gray-600 p-1 rounded-sm text-md w-[386px]"
-                    required
-                  >
-                    <option value="">Select fuel type</option>
-                    <option value="Petrol">Petrol</option>
-                    <option value="Diesel">Diesel</option>
-                  </select>
-                </div>
-              </div>
-
-              <br />
-
-              <button
-                type="submit"
-                className={`bg-blue-800 p-2 w-[386px] text-white flex items-center justify-center ${
-                  loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                disabled={loading}
-              >
-                {loading && (
-                  <svg
-                    className="animate-spin h-5 w-5 mr-2 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8V12H4z"
-                    ></path>
-                  </svg>
-                )}
-                {loading ? "Processing..." : "Register Vehicle"}
-              </button>
-            </form>
-          </motion.div>
-        </div>
-        <motion.div
-          //  variants={SlideLeft(0.1)}
-          //                  initial="hidden"
-          //                  whileInView={"visible"}
-
-          className="h-[300PX] w-[600px] bg-gray-900 ml-96 transform -translate-y-56 translate-x-96 rounded-lg"
-        >
-          {instruction && (
-            <div className="">
-              <div className="py-3 px-9">
-                <h1 className="text-xl text-white my-1">Vehicle Number</h1>
-                <p className="text-xs text-neutral-400 my-2">
-                  The vehicle number is a unique identifier assigned to your
-                  vehicle. It is usually displayed on the license plate and is
-                  required for legal and identification purposes. Please enter
-                  the complete registration number without spaces or special
-                  characters
-                </p>
-                <p className="text-neutral-200 text-xs my-1">
-                  Example: "ABC1234, DL5C4567"
-                </p>
-              </div>
-              <div className="py-3 px-9">
-                <h1 className="text-xl text-white my-1">Chassis Number</h1>
-                <p className="text-xs text-neutral-400 my-2">
-                  {" "}
-                  The chassis number (also known as the VIN or Vehicle
-                  Identification Number) is a unique 17-character code that
-                  identifies your vehicle. It can be found on the chassis or
-                  frame of your vehicle and may be listed in your vehicle's
-                  documentation (e.g., registration papers). This number is
-                  crucial for tracking and verifying the vehicle's history
-                </p>
-                <p className="text-neutral-200 text-xs my-1">
-                  Example: "1HGBH41JXMN109186"
-                </p>
-              </div>
+              </form>
             </div>
-          )}
+          </motion.div>
+        
+         
           {qrData && (
             <motion.div
               variants={SlideUp(0.1)}
@@ -383,10 +352,12 @@ const VehicleRegistration = () => {
                   </div>
                 </div>
               </div>
+              
             </motion.div>
           )}
-        </motion.div>
-      </div>
+        </div>
+    </div>
+    </div>
     </>
   );
 };

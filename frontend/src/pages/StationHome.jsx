@@ -120,7 +120,7 @@ const StationHome = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-950 text-white space-y-6 pl-40 pt-24">
+    <div className="p-6 min-h-screen bg-gray-800 text-white space-y-6 pl-40 pt-24">
       {error ? (
         <motion.div
           className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-4"

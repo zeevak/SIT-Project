@@ -48,7 +48,7 @@ const UserHeader = () => {
     <header className="fixed backdrop-blur-sm w-full top-0 left-0 z-40 bg-gray-1000 shadow-md px-6 py-4 flex justify-between items-center border-b border-gray-700">
       <div className="flex items-center gap-3">
         <Menu className="text-gray-600 cursor-pointer" size={24} />
-        <h1 className="text-2xl font-semibold text-neutral-400 pl-64">User Dashboard</h1>
+        <h1 className="text-2xl font-semibold text-white pl-64"></h1>
       </div>
 
       <div className="flex items-center gap-6">
@@ -74,7 +74,7 @@ const UserHeader = () => {
                    /></Link>
 
         {/* Logout Button */}
-        <button className="flex items-center gap-2 bg-orange-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded-md transition">
+        <button className="flex items-center gap-2 bg-red-700 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded-md transition">
           <LogOut size={18} />
           Logout
         </button>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Camera, Save, Pencil } from 'lucide-react';
+import { Camera, Save, Pencil, User, Mail, Phone, CreditCard, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const VehicleOwnerProfile = () => {
@@ -10,14 +10,14 @@ const VehicleOwnerProfile = () => {
     username: '',
     telno: '',
     nic: '',
-    licenseNumber: '',
+    role: '',
     imageData: '',
     imageType: '',
     imageName: ''
   });
-
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
@@ -37,20 +37,23 @@ const VehicleOwnerProfile = () => {
 
   const fetchProfile = async () => {
     try {
+      setIsLoading(true);
       const userId = localStorage.getItem('userId');
       const response = await axios.get(`http://localhost:8080/api/account/${userId}`);
       setProfileData(response.data.userAccountDto);
-      // Fetch profile image as Base64
       if (response.data.userAccountDto.imageData) {
         setPreviewUrl(`data:${response.data.userAccountDto.imageType};base64,${response.data.userAccountDto.imageData}`);
       }
     } catch (error) {
       console.error('Error fetching profile:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSave = async () => {
     try {
+      setIsLoading(true);
       const userId = localStorage.getItem('userId');
       const formData = new FormData();
 
@@ -67,11 +70,11 @@ const VehicleOwnerProfile = () => {
       });
 
       setIsEditing(false);
-      alert('Profile updated successfully!');
       fetchProfile();
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert('Failed to update profile.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -79,69 +82,115 @@ const VehicleOwnerProfile = () => {
     fetchProfile();
   }, []);
 
+  const fieldGroups = [
+    [
+      { label: 'Full Name', name: 'firstname', icon: <User size={18} className="text-blue-400" /> },
+      { label: 'Phone Number', name: 'telno', icon: <Phone size={18} className="text-blue-400" /> }
+    ],
+    [
+      { label: 'Email Address', name: 'username', icon: <Mail size={18} className="text-blue-400" /> },
+      { label: 'NIC', name: 'nic', icon: <CreditCard size={18} className="text-blue-400" /> },
+      { label: 'Role', name: 'role', icon: <Shield size={18} className="text-blue-400" /> }
+    ]
+  ];
+
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-slate-800 via-slate-800 to-black flex items-center justify-center p-4">
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4 sm:p-6">
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-5xl bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl p-10 text-white"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="w-full max-w-4xl bg-gray-800/90 backdrop-blur-sm border border-gray-700 rounded-xl shadow-xl overflow-hidden"
       >
-        <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-6">
-          <h2 className="text-3xl font-extrabold tracking-wide">Vehicle Owner Profile</h2>
-          <button
-            onClick={() => {
-              if (isEditing) handleSave();
-              else setIsEditing(true);
-            }}
-            className="flex items-center gap-2 px-5 py-2 bg-green-600 hover:bg-blue-700 transition rounded-full text-white font-medium shadow-lg"
-          >
-            {isEditing ? <Save size={18} /> : <Pencil size={18} />}
-            {isEditing ? 'Save Changes' : 'Edit Profile'}
-          </button>
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-6 py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <h1 className="text-2xl font-bold text-white">Vehicle Owner Profile</h1>
+            <button
+              onClick={() => {
+                if (isEditing) handleSave();
+                else setIsEditing(true);
+              }}
+              disabled={isLoading}
+              className={`flex items-center gap-2 px-5 py-2 rounded-lg font-medium transition-all ${
+                isEditing 
+                  ? 'bg-green-600 hover:bg-green-700 text-white' 
+                  : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+              }`}
+            >
+              {isLoading ? (
+                <span className="inline-block h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              ) : isEditing ? (
+                <Save size={18} />
+              ) : (
+                <Pencil size={18} />
+              )}
+              {isEditing ? 'Save Changes' : 'Edit Profile'}
+            </button>
+          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-10">
-          <div className="relative group">
-            <img
-              src={previewUrl || 'https://via.placeholder.com/150'} // Fallback to placeholder if no image
-              alt="Profile"
-              className="w-44 h-44 rounded-full object-cover border-4 border-blue-500 shadow-lg"
-            />
-            {isEditing && (
-              <label className="absolute bottom-2 right-2 bg-blue-600 p-2 rounded-full cursor-pointer hover:bg-blue-700 transition">
-                <Camera className="w-4 h-4 text-white" />
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleImageChange}
-                />
-              </label>
-            )}
-          </div>
-
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-            {[{ label: 'Full Name', name: 'firstname' },
-              { label: 'Email Address', name: 'username' },
-              { label: 'Phone Number', name: 'telno' },
-              { label: 'NIC', name: 'nic' },
-              { label: 'Role', name: 'role' }].map(({ label, name }) => (
-              <div key={name}>
-                <label className="block text-sm text-white/80 font-medium mb-1">{label}</label>
-                <input
-                  type="text"
-                  name={name}
-                  value={profileData[name]}
-                  onChange={handleChange}
-                  disabled={!isEditing}
-                  className={`w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-blue-500 transition ${
-                    isEditing ? '' : 'cursor-not-allowed'
-                  }`}
-                  placeholder={`Enter ${label.toLowerCase()}`}
-                />
+        {/* Profile Content */}
+        <div className="p-6 sm:p-8">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Profile Image */}
+            <div className="flex-shrink-0">
+              <div className="relative group">
+                <div className="w-36 h-36 rounded-full border-4 border-blue-500/30 overflow-hidden shadow-lg">
+                  <img
+                    src={previewUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(profileData.firstname)}&background=random&color=fff`}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {isEditing && (
+                  <label className="absolute bottom-2 right-2 bg-blue-600 p-2 rounded-full cursor-pointer hover:bg-blue-700 transition shadow-md">
+                    <Camera className="w-4 h-4 text-white" />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImageChange}
+                    />
+                  </label>
+                )}
               </div>
-            ))}
+            </div>
+
+            {/* Profile Details */}
+            <div className="flex-1 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {fieldGroups.map((group, groupIndex) => (
+                  <div key={groupIndex} className="space-y-4">
+                    {group.map(({ label, name, icon }) => (
+                      <div key={name} className="space-y-1">
+                        <label className="block text-sm font-medium text-gray-300">
+                          {label}
+                        </label>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            {icon}
+                          </div>
+                          <input
+                            type="text"
+                            name={name}
+                            value={profileData[name] || ''}
+                            onChange={handleChange}
+                            disabled={!isEditing || name === 'role'} // Role is typically not editable
+                            className={`w-full pl-10 pr-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition ${
+                              isEditing && name !== 'role'
+                                ? 'bg-gray-700/50 border-gray-600 text-white' 
+                                : 'bg-gray-700/30 border-gray-700 text-gray-300 cursor-not-allowed'
+                            }`}
+                            placeholder={`Enter ${label.toLowerCase()}`}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
