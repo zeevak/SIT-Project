@@ -70,72 +70,71 @@ const AdminHome = () => {
 
     fetchData();
   }, [inactiveStation]);
-  const cards = [
-    {
-      title: "Registered Vehicle",
-      description: "Add, edit, and view registered vehicles.",
-      icon: "🚗",
-      bgColor: "bg-gradient-to-r from-blue-500 to-blue-700",
-      amt: registeredVehiclesCount,
-    },
-    {
-      title: "Registered Stations",
-      description: "Track fuel allocations and consumption.",
-      icon: "⛽",
-      bgColor: "bg-gradient-to-r from-green-500 to-green-700",
-      amt: registeredStationCount,
-    },
-    {
-      title: "Total Stations",
-      description: "Manage admin and user accounts.",
-      icon: "👤",
-      bgColor: "bg-gradient-to-r from-purple-500 to-purple-700",
-      amt: totalStations,
-    },
-    {
-      title: "activeStations",
-      description: "Generate and analyze system reports.",
-      icon: "📊",
-      bgColor: "bg-gradient-to-r from-yellow-500 to-yellow-700",
-      amt: activeStations,
-    },
-    {
-      title: "In Active Stations",
-      description: "Send and manage alerts and notifications.",
-      icon: "🔔",
-      bgColor: "bg-gradient-to-r from-red-500 to-red-700",
-      amt: inactiveStation,
-    },
-    {
-      title: "Total Available petrolCapacity",
-      description: "Configure system preferences.",
-      icon: "🛢️",
-      bgColor: "bg-gradient-to-r from-gray-500 to-gray-700",
-      amt: `${petrolCapacity}L`,
-    },
-    {
-      title: "Total Available DieselCapacity",
-      description: "Access help and support resources.",
-      icon: "🛢",
-      bgColor: "bg-gradient-to-r from-pink-500 to-pink-700",
-      amt: `${dieselCapacity}L`,
-    },
-    {
-      title: "Current Petrol Price",
-      description: "Access help and support resources.",
-      icon: "💵",
-      bgColor: "bg-gradient-to-r from-orange-500 to-orange-700",
-      amt: `${petrolPrice}.00/L Rs`,
-    },
-    {
-      title: "Current Diesel Price",
-      description: "Access help and support resources.",
-      icon: "💴",
-      bgColor: "bg-gradient-to-r from-violet-500 to-pink-700",
-      amt: `${dieselPrice}.00/L Rs`,
-    },
-  ];   
-
+ const cards = [
+  {
+    title: "Registered Vehicle",
+    description: "Add, edit, and view registered vehicles.",
+    icon: "🚗",
+    bgColor: "bg-gradient-to-r from-blue-600 to-cyan-500",
+    amt: registeredVehiclesCount,
+  },
+  {
+    title: "Registered Stations",
+    description: "Track fuel allocations and consumption.",
+    icon: "⛽",
+    bgColor: "bg-gradient-to-r from-emerald-600 to-teal-400",
+    amt: registeredStationCount,
+  },
+  {
+    title: "Total Stations",
+    description: "Manage admin and user accounts.",
+    icon: "👤",
+    bgColor: "bg-gradient-to-r from-violet-600 to-purple-400",
+    amt: totalStations,
+  },
+  {
+    title: "Active Stations",
+    description: "Generate and analyze system reports.",
+    icon: "📊",
+    bgColor: "bg-gradient-to-r from-amber-600 to-yellow-400",
+    amt: activeStations,
+  },
+  {
+    title: "In Active Stations",
+    description: "Send and manage alerts and notifications.",
+    icon: "🔔",
+    bgColor: "bg-gradient-to-r from-rose-600 to-pink-500",
+    amt: inactiveStation,
+  },
+  {
+    title: "Total Available Petrol",
+    description: "Configure system preferences.",
+    icon: "🛢️",
+    bgColor: "bg-gradient-to-r from-orange-600 to-amber-500",
+    amt: `${petrolCapacity}L`,
+  },
+  {
+    title: "Total Available Diesel",
+    description: "Access help and support resources.",
+    icon: "🛢",
+    bgColor: "bg-gradient-to-r from-indigo-600 to-blue-400",
+    amt: `${dieselCapacity}L`,
+  },
+  {
+    title: "Current Petrol Price",
+    description: "Access help and support resources.",
+    icon: "💵",
+    bgColor: "bg-gradient-to-r from-lime-600 to-green-400",
+    amt: `${petrolPrice}.00/L Rs`,
+  },
+  {
+    title: "Current Diesel Price",
+    description: "Access help and support resources.",
+    icon: "💴",
+    bgColor: "bg-gradient-to-r from-fuchsia-600 to-purple-400",
+    amt: `${dieselPrice}.00/L Rs`,
+  },
+];
   useEffect(() => {
     const fetchStations = async () => {
       try {
@@ -186,11 +185,13 @@ const AdminHome = () => {
     series: [
       {
         name: "Petrol Capacity",
-        data: [20,30,40,50,60,70]
+        data: [20,30,40,50,60,70],
+         color: "#06b6d4" // cyan-500
       },
       {
         name: "Diesel Capacity",
-        data: [20,30,40,50,60,90]
+        data: [20,30,40,50,60,90],
+        color: "#8b5cf6" // violet-500
       },
     ],
     options: {
@@ -245,7 +246,7 @@ const AdminHome = () => {
     },
   });
   return (
-    <div className="p-6 text-white">
+    <div className=" bg-black p-6 text-white">
       <h1 className="text-2xl font-bold mb-6">Admin Panel</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {cards.map((card, index) => (

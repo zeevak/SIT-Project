@@ -86,34 +86,42 @@ const StationRegistration = () => {
     }
   };
 
-  return (
-    <div className="bg-gradient-to-br from-slate-800 via-slate-800 to-black min-h-screen w-full fixed overflow-y-auto pt-8">
-      {error && <Error error={error} setError={setError} />}
-      {success && <Success success={success} setSuccess={setSuccess} />}
+   return (
+    <div className="bg-gray-900 min-h-screen w-full">
+      {/* Space for navbar */}
+      <div className="h-20"></div> {/* Adjust this height to match your navbar */}
       
-      <div className="container mx-auto px-4 py-20">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+      {/* Form container with increased top padding */}
+      <div className="flex items-center justify-center p-4 pt-12"> {/* Added pt-12 for more space */}
+        {error && <Error error={error} setError={setError} />}
+        {success && <Success success={success} setSuccess={setSuccess} />}
+        
+        <div className="w-full max-w-md">
           <motion.div 
             variants={SlideRight(0.1)}
             initial="hidden"
-            whileInView={"visible"}
-            className="w-full max-w-md p-8 rounded-lg"
+            whileInView="visible"
+            className="bg-gray-800 p-8 rounded-lg shadow-xl"
           >
-            <div className="flex items-center justify-center mb-6">
-              <FaGasPump className="text-4xl text-orange-500 mr-3" />
-              <h2 className="text-3xl font-bold text-white">
-                Station Registration
-              </h2>
+            {/* Form Header */}
+            <div className="text-center mb-8">
+              <div className="flex items-center justify-center mb-3">
+                <FaGasPump className="text-3xl text-orange-500 mr-2" />
+                <h2 className="text-2xl font-bold text-white">
+                  Station Registration
+                </h2>
+              </div>
+              <div className="w-16 h-1 bg-blue-500 mx-auto"></div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                <div className="w-full">
-                  <label
-                    htmlFor="licenseNumber"
-                    className="block text-sm font-medium text-neutral-300 mb-1 flex items-center"
-                  >
-                    <FaIdCard className="mr-2" /> Licence No
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* License No and Station ID */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-300 mb-1">
+                    <span className="flex items-center">
+                      <FaIdCard className="mr-2" /> Licence No
+                    </span>
                   </label>
                   <div className="relative">
                     <input
@@ -122,17 +130,17 @@ const StationRegistration = () => {
                       value={formData.licenseNumber}
                       onChange={handleChange}
                       placeholder="Enter Licence No"
-                      className="bg-gray-200 p-2 pl-10 rounded-sm text-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="bg-gray-700 text-white p-2 pl-9 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-                    <MdDriveFileRenameOutline className="absolute left-3 top-3 text-gray-500" />
+                    <MdDriveFileRenameOutline className="absolute left-2.5 top-2.5 text-gray-400" />
                   </div>
                 </div>
-                <div className="w-full">
-                  <label
-                    htmlFor="stationId"
-                    className="block text-sm font-medium text-neutral-300 mb-1 flex items-center"
-                  >
-                    <FaIdCard className="mr-2" /> Station ID
+                
+                <div>
+                  <label className="block text-sm font-medium text-neutral-300 mb-1">
+                    <span className="flex items-center">
+                      <FaGasPump className="mr-2" /> Station ID
+                    </span>
                   </label>
                   <div className="relative">
                     <input
@@ -141,19 +149,19 @@ const StationRegistration = () => {
                       value={formData.stationId}
                       onChange={handleChange}
                       placeholder="10XXXX"
-                      className="bg-gray-200 p-2 pl-10 rounded-sm text-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="bg-gray-700 text-white p-2 pl-9 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
-                    <FaGasPump className="absolute left-3 top-3 text-gray-500" />
+                    <FaIdCard className="absolute left-2.5 top-2.5 text-gray-400" />
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label
-                  htmlFor="dealerName"
-                  className="block text-sm font-medium text-neutral-300 flex items-center"
-                >
-                  <FaUserTie className="mr-2" /> Dealer Name
+              {/* Dealer Name */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-1">
+                  <span className="flex items-center">
+                    <FaUserTie className="mr-2" /> Dealer Name
+                  </span>
                 </label>
                 <div className="relative">
                   <input
@@ -162,18 +170,18 @@ const StationRegistration = () => {
                     value={formData.dealerName}
                     onChange={handleChange}
                     placeholder="Enter Dealer's Name"
-                    className="bg-gray-200 p-2 pl-10 rounded-sm text-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-700 text-white p-2 pl-9 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  <FaUserTie className="absolute left-3 top-3 text-gray-500" />
+                  <FaUserTie className="absolute left-2.5 top-2.5 text-gray-400" />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label
-                  htmlFor="stationAddress"
-                  className="block text-sm font-medium text-neutral-300 flex items-center"
-                >
-                  <FaMapMarkerAlt className="mr-2" /> Station Address
+              {/* Station Address */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-300 mb-1">
+                  <span className="flex items-center">
+                    <FaMapMarkerAlt className="mr-2" /> Station Address
+                  </span>
                 </label>
                 <div className="relative">
                   <input
@@ -182,26 +190,25 @@ const StationRegistration = () => {
                     value={formData.stationAddress}
                     onChange={handleChange}
                     placeholder="Station Address"
-                    className="bg-gray-200 p-2 pl-10 rounded-sm text-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="bg-gray-700 text-white p-2 pl-9 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  <FaMapMarkerAlt className="absolute left-3 top-3 text-gray-500" />
+                  <FaMapMarkerAlt className="absolute left-2.5 top-2.5 text-gray-400" />
                 </div>
               </div>
 
-              <div className="pt-4">
+              {/* Submit Button */}
+              <div className="pt-3">
                 <button
                   type="submit"
-                  className={`bg-blue-600 w-full text-white p-3 rounded-sm flex items-center justify-center transition-all duration-300 ${
-                    loading
-                      ? "opacity-70 cursor-not-allowed"
-                      : "hover:bg-blue-700 hover:shadow-lg"
+                  className={`bg-blue-600 w-full text-white p-2.5 rounded flex items-center justify-center transition ${
+                    loading ? "opacity-70 cursor-not-allowed" : "hover:bg-blue-700"
                   }`}
                   disabled={loading}
                 >
                   {loading ? (
                     <Oval
-                      height={24}
-                      width={24}
+                      height={20}
+                      width={20}
                       color="white"
                       visible={true}
                       ariaLabel="oval-loading"
@@ -211,7 +218,7 @@ const StationRegistration = () => {
                     />
                   ) : (
                     <>
-                      <FaPaperPlane className="mr-2" /> 
+                      <FaPaperPlane className="mr-2" />
                       Register Station
                     </>
                   )}
@@ -219,29 +226,9 @@ const StationRegistration = () => {
               </div>
             </form>
 
-            <div className="mt-6 text-center text-sm text-neutral-400">
+            {/* Login Link */}
+            <div className="mt-5 text-center text-xs text-neutral-400">
               <p>Already registered? <a href="#" className="text-blue-400 hover:underline">Login here</a></p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={SlideLeft(0.1)}
-            initial="hidden"
-            whileInView={"visible"}
-            className="w-full lg:w-1/2 pb-15 hidden lg:block"
-          >
-            <div className="relative">
-              <img 
-                src="../src/Assets/—Pngtree—gas station in public facilities_5456633.png" 
-                alt="Gas Station" 
-                className="w-full max-w-xl mx-auto rounded-sm  transform hover:scale-105 transition-transform duration-500"
-              />
-              {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-800 to-transparent p-6 rounded-b-lg">
-                <h3 className="text-xl font-bold text-white">Join Our Network</h3>
-                <p className="text-neutral-300 mt-2">
-                  Register your gas station to become part of our growing network and enjoy seamless management.
-                </p>
-              </div> */}
             </div>
           </motion.div>
         </div>

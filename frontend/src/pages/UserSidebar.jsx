@@ -12,7 +12,7 @@ import {
 
 const UserSidebar = () => {
   return (
-    <div className="w-64 bg-gray-900 text-neutral-400 h-screen fixed shadow-xl z-50 flex flex-col p-4 space-y-4">
+    <div className="w-64 bg-black text-white h-screen fixed shadow-xl z-50 flex flex-col p-4 space-y-4">
       <h2 className="text-2xl font-bold text-center mb-4 tracking-wide text-white">
               <img
                 src="../src/Assets/Monochrome Ilustration Graffiti Logo new.png"

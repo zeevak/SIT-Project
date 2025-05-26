@@ -75,7 +75,7 @@ const VehicleTransaction = () => {
     : "N/A";
 
   return (
-    <div className="container pl-40 pt-24 text-white">
+    <div className="container pl-40 pt-24 text-white min-h-screen w-full">
       <motion.h1
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}

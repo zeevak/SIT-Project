@@ -11,9 +11,13 @@ import {
 
 const StationSidebar = () => {
   return (
-    <div className="w-64 bg-gray-900 text-neutral-400 h-screen fixed shadow-xl z-50 flex flex-col p-4 space-y-4">
+    <div className="w-64 bg-black text-white h-screen fixed shadow-xl z-50 flex flex-col p-4 space-y-4">
       <div className="text-center mb-4">
-        
+         <img
+                src="../src/Assets/Monochrome Ilustration Graffiti Logo new.png"
+                alt=""
+                className="w-[125px] "
+              />
       </div>
 
       {/* Dashboard */}

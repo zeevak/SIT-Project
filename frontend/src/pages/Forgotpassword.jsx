@@ -121,15 +121,14 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <div className="bg-slate-900 h-screen w-full fixed ">
-        <div className="grid grid-cols-2  items-center px-7 my-44 ">
+      <div className="bg-black min-h-screen w-full pt-40 pb-20">
+        <div className="flex justify-center"> 
           <div className="ml-20">
             <motion.img
               variants={SlideRight(0.1)}
               initial="hidden"
               whileInView={"visible"}
-              src="src/Assets/ps.png"
-              alt=""
+            
             />
           </div>
           <motion.div
@@ -139,7 +138,8 @@ const ForgotPassword = () => {
             className="flex items-center justify-center mr-14"
           >
             {step === 1 && (
-              <div className="p-6 w-full">
+              <div className="bg-gray-800 p-6 rounded-lg">
+               
                 <h2 className="text-5xl font-bold mb-20 text-white">
                   Forgot Password?
                 </h2>
